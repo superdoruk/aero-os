@@ -46,21 +46,21 @@ class AeroHosgeldin(Gtk.Window):
         # RAM
         ram = subprocess.getoutput("free -h | awk '/^Mem:/{print $2}'")
         ram_label = Gtk.Label()
-        ram_label.set_markup(f'<span color="#D3D1C7">🖥️  RAM: {ram}</span>')
+        ram_label.set_markup(f'<span color="#D3D1C7">RAM: {ram}</span>')
         ram_label.set_halign(Gtk.Align.START)
         bilgi_kutu.pack_start(ram_label, False, False, 0)
         
         # CPU
         cpu = subprocess.getoutput("cat /proc/cpuinfo | grep 'model name' | head -1 | cut -d: -f2").strip()
         cpu_label = Gtk.Label()
-        cpu_label.set_markup(f'<span color="#D3D1C7">⚡  CPU: {cpu}</span>')
+        cpu_label.set_markup(f'<span color="#D3D1C7">CPU: {cpu}</span>')
         cpu_label.set_halign(Gtk.Align.START)
         bilgi_kutu.pack_start(cpu_label, False, False, 0)
         
         # Mod
-        mod = open(os.path.expanduser("~/.aero/mod.conf")).read().strip() if os.path.exists(os.path.expanduser("~/.aero/mod.conf")) else "AEROWS"
+        mod = open(os.path.expanduser("~/.aero/mod.conf")).read().strip() if os.path.exists(os.path.expanduser("~/.aero/mod.conf")) else "AEROEG"
         mod_label = Gtk.Label()
-        mod_label.set_markup(f'<span color="#D3D1C7">🔧  Mod: {mod}</span>')
+        mod_label.set_markup(f'<span color="#D3D1C7">Mod: {mod}</span>')
         mod_label.set_halign(Gtk.Align.START)
         bilgi_kutu.pack_start(mod_label, False, False, 0)
         
@@ -74,21 +74,27 @@ class AeroHosgeldin(Gtk.Window):
         buton_kutu = Gtk.Box(spacing=10)
         buton_kutu.set_halign(Gtk.Align.CENTER)
         
-        ayarlar_btn = Gtk.Button(label="⚙️  Ayarlar")
+        ayarlar_btn = Gtk.Button(label="Ayarlar")
         ayarlar_btn.connect("clicked", self.ayarlar_ac)
         buton_kutu.pack_start(ayarlar_btn, False, False, 0)
         
-        kapat_btn = Gtk.Button(label="✓  Başla")
+        kapat_btn = Gtk.Button(label="Başla")
         kapat_btn.connect("clicked", Gtk.main_quit)
         buton_kutu.pack_start(kapat_btn, False, False, 0)
-        
+
+        mod_btn = Gtk.Button(label="Mod Değiştir")
+        mod_btn.connect("clicked", self.mod_degistir)
+        buton_kutu.pack_start(mod_btn, False, False, 0)
+
         kutu.pack_start(buton_kutu, False, False, 0)
         
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
     
     def ayarlar_ac(self, widget):
-        subprocess.Popen(["bash","-c", "bash ~/aero-ayarlar.sh"])
+        subprocess.Popen(["python3", os.path.expanduser("~/aero-kontrol.py")])
+    def mod_degistir(self, widget):
+        subprocess.Popen(["bash", "-c", "bash ~/aero-mod-gecis.sh"])
 
 pencere = AeroHosgeldin()
 Gtk.main()

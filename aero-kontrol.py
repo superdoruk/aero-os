@@ -25,7 +25,7 @@ class AeroKontrol(Gtk.Window):
         baslik.set_markup('<span font="18" color="#5DCAA5"><b>AERO Kontrol Merkezi</b></span>')
         ana.pack_start(baslik, False, False, 0)
         
-        mod = open(os.path.expanduser("~/.aero/mod.conf")).read().strip() if os.path.exists(os.path.expanduser("~/.aero/mod.conf")) else "AEROWS"
+        mod = open(os.path.expanduser("~/.aero/mod.conf")).read().strip() if os.path.exists(os.path.expanduser("~/.aero/mod.conf")) else "AEROEG"
         mod_label = Gtk.Label()
         mod_label.set_markup(f'<span color="#85B7EB">Aktif mod: {mod}</span>')
         ana.pack_start(mod_label, False, False, 0)

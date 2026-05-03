@@ -4,10 +4,9 @@ echo "================================"
 echo "   AERO OS — Ayarlar"
 echo "================================"
 echo ""
-echo "  Mevcut mod: $(cat ~/.aero/mod.conf 2>/dev/null || echo 'AEROWS')"
-echo ""
-echo "  1) AEROWS moduna geç"
-echo "  2) AEROUX moduna geç"
+echo "  Mevcut mod: $(cat ~/.aero/mod.conf 2>/dev/null || echo 'AEROEG')"echo ""
+echo "  1) AEROEG moduna geç"
+echo "  2) AEROTB moduna geç"
 echo "  3) İzin yöneticisi aç/kapat"
 echo "  4) Task bar konumu değiştir"
 echo "  5) Antivirüs tarama"
@@ -17,12 +16,12 @@ read -p "  Seçiminiz: " secim
 
 case $secim in
     1)
-        echo "AEROWS" > ~/.aero/mod.conf
-        echo "✓ AEROWS moduna geçildi!"
+        bash ~/aero-mod-gecis.sh
+        echo "✓ AEROEG moduna geçildi!"
         ;;
     2)
-        echo "AEROUX" > ~/.aero/mod.conf
-        echo "✓ AEROUX moduna geçildi!"
+        bash ~/aero-mod-gecis.sh
+        echo "✓ AEROTB moduna geçildi!"
         ;;
     3)
         bash ~/aero-izin.py
